@@ -36,5 +36,46 @@ public class Program
                     maximo = 200;
                     break;
             }
-           
+            int numeroAleatorio = random.Next(0, maximo + 1);
+
+
+            bool ganador = false;
+            int turno = 1;
+
+            while (!ganador)
+            {
+                Console.WriteLine($"Jugador {turno}, ingrese su número:");
+                int numeroIngresado;
+                while (!int.TryParse(Console.ReadLine(), out numeroIngresado) || numeroIngresado < 0 || numeroIngresado > maximo)
+                {
+                    Console.WriteLine("Ingrese un número válido entre 0 y " + maximo + ":");
+                }
+
+                if (numeroIngresado > numeroAleatorio)
+                {
+                    Console.WriteLine("MENOR");
+                }
+                else if (numeroIngresado < numeroAleatorio)
+                {
+                    Console.WriteLine("MAYOR");
+                }
+                else
+                {
+                    Console.WriteLine("¡HAS GANADO!");
+                    ganador = true;
+                }
+
+                turno = (turno % numJugadores) + 1;
+            }
+
+
+            Console.WriteLine("¿Desean jugar de nuevo? (s/n):");
+            char respuesta = Console.ReadKey().KeyChar;
+            jugarDeNuevo = respuesta == 's' || respuesta == 'S';
+            Console.WriteLine();
+        }
+    }
+}
+
+
 
